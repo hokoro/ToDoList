@@ -1,0 +1,67 @@
+/*폰트*/
+.nanum-gothic-regular {
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.nanum-gothic-bold {
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.nanum-gothic-extrabold {
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/*메인 페이지 탑*/
+.main-page-top{
+    text-align: center;
+    margin:2rem;
+}
+
+/*메인 페이지 중간*/
+.main-page-middle{
+    text-align: center;
+    padding: 1rem 1.5rem;
+}
+.main-page-middle-title{
+    margin: 1rem;
+}
+.main-page-middle-description{
+    margin: 1rem;
+}
+.main-page-middle-button{
+    margin: 1rem;
+}
+
+
+
+
+/*메인 페이지 바텀*/
+.main-page-bottom{
+    text-align: center;
+}
+
+
+.main-page-bottom-span{
+    padding: 0.5rem;
+}
+.main-page-bottom-logo{
+    padding: 0.5rem;
+}
+.mw-500{
+    max-width: 500px;
+    padding: 1rem 1.5rem;
+}
+
+
