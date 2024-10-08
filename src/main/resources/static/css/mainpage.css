@@ -1,21 +1,4 @@
 /*폰트*/
-.nanum-gothic-regular {
-    font-family: "Nanum Gothic", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-.nanum-gothic-bold {
-    font-family: "Nanum Gothic", sans-serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.nanum-gothic-extrabold {
-    font-family: "Nanum Gothic", sans-serif;
-    font-weight: 800;
-    font-style: normal;
-}
 .jua-regular {
     font-family: "Jua", sans-serif;
     font-weight: 400;
@@ -59,9 +42,6 @@
 .main-page-bottom-logo{
     padding: 0.5rem;
 }
-.mw-500{
-    max-width: 500px;
-    padding: 1rem 1.5rem;
-}
+
 
 
