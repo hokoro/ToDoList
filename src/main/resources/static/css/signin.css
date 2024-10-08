@@ -1,0 +1,36 @@
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.signin-page-top{
+    text-align: center;
+    margin:2rem;
+}
+
+.signin-page-middle{
+    text-align: center;
+    padding: 1rem 1.5rem;
+}
+
+.signin-page-middle-id{
+    margin: 1rem;
+}
+
+.signin-page-middle-password{
+    margin: 1rem;
+}
+
+.signin-page-bottom{
+    text-align: center;
+}
+
+.signin-page-bottom-span{
+    padding: 0.5rem;
+}
+
+.signin-page-bottom-logo{
+    padding: 0.5rem;
+}

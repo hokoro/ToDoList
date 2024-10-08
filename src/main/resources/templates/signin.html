@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>signin</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/signin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
+    <div class="signin-page-top jua-regular">
+        <h1>회원가입</h1>
+    </div>
+    <hr>
+    <div class="signin-page-middle">
+        <div class="signin-page-middle-id">
+            <p class="jua-regular">아이디</p>
+            <input id="id" type="text" name="id">
+        </div>
+        <div class="signin-page-middle-password">
+            <p class="jua-regular">비밀번호</p>
+            <input id="password" type="text" name="password">
+        </div>
+        <div class="signin-page-middle-button">
+            <button type="button" class="btn btn-primary" onclick="">확인</button>
+        </div>
+    </div>
+    <hr>
+    <div class="signin-page-bottom">
+        <div class="signin-page-bottom-span">
+            <span>공지사항</span>
+            <span>제휴문의</span>
+            <span>서비스 소개</span>
+        </div>
+        <div class="signin-page-bottom-logo jua-regular">
+            <h5>To Do List</h5>
+        </div>
+    </div>
 </body>
 </html>
