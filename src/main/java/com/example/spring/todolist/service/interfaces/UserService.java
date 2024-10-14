@@ -5,6 +5,5 @@ import com.example.spring.todolist.dto.UserResponseFormDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface UserService {
-
     ResponseEntity<UserResponseFormDTO> create(UserCreateFormDTO userCreateFormDTO);
 }
