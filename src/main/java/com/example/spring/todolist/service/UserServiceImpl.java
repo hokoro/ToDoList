@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
 
         if(member.isEmpty()){   // 아이디 가입이 가능할 경우
             User newUser = User.builder().
-                    user_id(userCreateFormDTO.getUser_id()).
-                    password(passwordEncoder.encode(userCreateFormDTO.getPassword())).
+                    user_id(userCreateFormDTO.getUser_id()).    // 클라이언트에서 받은 아이디
+                    password(passwordEncoder.encode(userCreateFormDTO.getPassword())).  // 클라이언트에서 받은 비밀번호 -> 암호화
                     build();
             userRepository.save(newUser);
             return new ResponseEntity<>(new UserResponseFormDTO("회원가입에 성공하였습니다") , HttpStatus.OK);
