@@ -1,0 +1,12 @@
+.signup-container{
+    text-align: center;
+}
+
+input{
+    border-radius: 5px;
+}
+
+.error-message{
+    color: red;
+    font-weight: bold;
+}
