@@ -28,20 +28,20 @@ const Signup: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if(!/^[a-zA-Z0-9]{5,}$/.test(formData.user_id)){    // 아이디는 소문자, 대문자 알파벳과 0~9까지의 숫자만 사용하고 5자리 이상의 영문과 숫자가 포함되어 있는지를 조건화
-            setError('아이디는 5자리 이상의 영문과 숫자가 포함되어야 합니다.');
-            return;
-        }
-
-        if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(formData.password)){    // 비밀번호 규정 위반
-            setError('비밀번호는 8자리 이상이며, 대소문자, 숫자,특수문자를 포함해야 합니다.');
-            return;
-        }
+        // if(!/^[a-zA-Z0-9]{5,}$/.test(formData.user_id)){    // 아이디는 소문자, 대문자 알파벳과 0~9까지의 숫자만 사용하고 5자리 이상의 영문과 숫자가 포함되어 있는지를 조건화
+        //     setError('아이디는 5자리 이상의 영문과 숫자가 포함되어야 합니다.');
+        //     return;
+        // }
+        //
+        // if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(formData.password)){    // 비밀번호 규정 위반
+        //     setError('비밀번호는 8자리 이상이며, 대소문자, 숫자,특수문자를 포함해야 합니다.');
+        //     return;
+        // }
 
         setError(null); // 유효한 입력이 남아있지 않도록 메세지 초기화
 
         try{
-            const response = await fetch('http://127.0.0.1:8045/api/signup',{
+            const response = await fetch('http://127.0.0.1:8045/api/user/create',{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData),
