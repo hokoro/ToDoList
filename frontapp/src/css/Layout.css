@@ -1,0 +1,29 @@
+/* Layout의 기본 구조 스타일링 */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    padding: 10px;
+    text-align: center;
+    margin-top: auto; /* Footer를 페이지 아래에 고정 */
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.long-page {
+    min-height: 500px; /* 고정된 높이 2000px */
+    overflow-y:auto;
+    flex:1px;
+    padding: 20px;
+}
