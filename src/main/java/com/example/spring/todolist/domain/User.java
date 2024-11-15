@@ -23,4 +23,8 @@ public class User {
 
     @Column(nullable = false , name="password")
     private String password;
+
+    @OneToOne(mappedBy = "user")
+    private LoginInfo loginInfo; // 양방향 관계를 위해 추가 (선택 사항)
+
 }
