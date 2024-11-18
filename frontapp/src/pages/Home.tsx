@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/text.css';
@@ -6,7 +6,32 @@ import '../css/Home.css';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
-    return (
+
+    // 로그아웃 상태 체크 버튼
+    const [isLoggedIn , setIsLoggedIn] = useState(false);
+
+    // 로그인 상태 여부
+    useEffect(() => {
+        const authToken = localStorage.getItem('authToken');
+        if(authToken){
+            setIsLoggedIn(true);
+        }
+
+
+    },[]);
+
+
+
+
+
+    const handleLogout = () =>{
+        setIsLoggedIn(false);   // 로그아웃 버튼 클릭시
+        console.log('로그아웃이 완료되었습니다');
+
+    };
+
+
+        return (
         <div className="main">
             <p>안녕하십니까</p>
             <p>ToDoList 개발자입니다.</p>
@@ -14,14 +39,15 @@ const Home: React.FC = () => {
             <p>이용 중 불편하신 사항은</p>
             <p>문의사항을 통해 문의하시기 바랍니다.</p>
             <div>
-                <button className="btn btn-primary my-half"
-                        onClick={() => navigate('/login')}>로그인</button>
-                <button
-                    className="btn btn-primary"
-                    onClick={() => navigate('/signup')}
-                >
-                    회원가입
-                </button>
+                {isLoggedIn ? (
+                    <button className={"btn btn-primary"} onClick={handleLogout}>로그아웃</button>
+                ):(
+                    <>
+                    <button className="btn btn-primary my-half"
+                            onClick={() => navigate('/login')}>로그인</button>
+                    <button className="btn btn-primary" onClick={() => navigate('/signup')}>회원가입</button>
+                    </>
+                )}
             </div>
         </div>
     );
