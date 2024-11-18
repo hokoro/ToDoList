@@ -40,7 +40,10 @@ const Home: React.FC = () => {
             <p>문의사항을 통해 문의하시기 바랍니다.</p>
             <div>
                 {isLoggedIn ? (
-                    <button className={"btn btn-primary"} onClick={handleLogout}>로그아웃</button>
+                    <>
+                    <button className={"btn btn-primary my-half"} onClick={handleLogout}>로그아웃</button>
+                    <button className={"btn btn-primary"}>ToDoList</button>
+                    </>
                 ):(
                     <>
                     <button className="btn btn-primary my-half"
