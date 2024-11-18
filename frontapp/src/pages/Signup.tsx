@@ -41,7 +41,7 @@ const Signup: React.FC = () => {
         setError(null); // 유효한 입력이 남아있지 않도록 메세지 초기화
 
         try{
-            const response = await fetch('http://127.0.0.1:8045/api/user/create',{
+            const response = await fetch('https://127.0.0.1:8045/api/user/create',{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData),

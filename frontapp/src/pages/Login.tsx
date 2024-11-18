@@ -33,17 +33,17 @@ const Login: React.FC = () => {
         setError(null);
 
         try{
-            const response = await fetch("http://127.0.0.1:8045/api/user/login",{
+            const response = await fetch("https://127.0.0.1:8045/api/user/login",{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(formData),
             })
             if(response.ok){
                 const data = await response.json();
-                alert(`Message: ${data.message}\nToken: ${data.token}`);
-
+                alert(data.message);
                 // token 사용 예제 (로컬 스토리지 저장)
                 localStorage.setItem('authToken', data.token);
+                //localStorage.setItem('isLogined' , );
                 navigate('/');
             }else{
                 const errorData = await response.json();
