@@ -1,6 +1,7 @@
 package com.example.spring.todolist.controller;
 
 import com.example.spring.todolist.dto.LoginFormDTO;
+import com.example.spring.todolist.dto.LoginResponseFormDTO;
 import com.example.spring.todolist.dto.UserCreateFormDTO;
 import com.example.spring.todolist.dto.UserResponseFormDTO;
 import com.example.spring.todolist.repository.UserRepository;
@@ -26,7 +27,7 @@ public class UserAPIController {
     }
 
     @PostMapping("/user/login")
-    public ResponseEntity<UserResponseFormDTO> Login(@RequestBody LoginFormDTO loginFormDTO , HttpSession session){
+    public ResponseEntity<LoginResponseFormDTO> Login(@RequestBody LoginFormDTO loginFormDTO , HttpSession session){
         return userService.login(loginFormDTO , session);
     }
 

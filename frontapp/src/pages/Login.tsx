@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "../css/text.css";
 import "../css/Login.css";
+import {useNavigate} from "react-router-dom";
 
 interface FormData{
     user_id: string,
@@ -9,6 +10,7 @@ interface FormData{
 
 
 const Login: React.FC = () => {
+    const navigate = useNavigate();
 
     const [formData , setFormData] = useState<FormData>({
         user_id:'',
@@ -31,13 +33,18 @@ const Login: React.FC = () => {
         setError(null);
 
         try{
-            const response = await fetch("http://127.0.0.1:8045/api/login",{
+            const response = await fetch("http://127.0.0.1:8045/api/user/login",{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify(formData),
             })
             if(response.ok){
-                alert('로그인 성공')
+                const data = await response.json();
+                alert(`Message: ${data.message}\nToken: ${data.token}`);
+
+                // token 사용 예제 (로컬 스토리지 저장)
+                localStorage.setItem('authToken', data.token);
+                navigate('/');
             }else{
                 const errorData = await response.json();
                 setError(errorData.message|| '아이디와 비밀번호를 다시 확인해주세요');

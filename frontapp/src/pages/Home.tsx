@@ -6,7 +6,6 @@ import '../css/Home.css';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
-
     return (
         <div className="main">
             <p>안녕하십니까</p>
