@@ -3,10 +3,7 @@ package com.example.spring.todolist.service;
 
 import com.example.spring.todolist.domain.LoginInfo;
 import com.example.spring.todolist.domain.User;
-import com.example.spring.todolist.dto.LoginFormDTO;
-import com.example.spring.todolist.dto.LoginResponseFormDTO;
-import com.example.spring.todolist.dto.UserCreateFormDTO;
-import com.example.spring.todolist.dto.UserResponseFormDTO;
+import com.example.spring.todolist.dto.*;
 import com.example.spring.todolist.repository.LoginRepository;
 import com.example.spring.todolist.repository.UserRepository;
 import com.example.spring.todolist.service.interfaces.UserService;
@@ -80,7 +77,7 @@ public class UserServiceImpl implements UserService {
                 }
 
                 String sessionKey = UUID.randomUUID().toString();
-                session.setAttribute("SESSION_KEY" , sessionKey);
+                session.setAttribute(loginFormDTO.getUser_id(), sessionKey);
                 LoginInfo loginInfo = LoginInfo.builder().
                         sessionKey(passwordEncoder.encode(sessionKey)).
                         user(member).
@@ -92,6 +89,34 @@ public class UserServiceImpl implements UserService {
             }
         }
 
+
+    }
+
+    // 로그아웃
+    @Override
+    public ResponseEntity<LogoutResponseFormDTO> logout(LogoutFormDTO logoutFormDTO, HttpSession session) {
+        String sessionKey = logoutFormDTO.getSessionKey();
+        if(sessionKey.isBlank()){
+            return new ResponseEntity<>(new LogoutResponseFormDTO("로그아웃에 필요한 정보가 없습니다.") , HttpStatus.BAD_REQUEST);
+        }
+
+        // 로그인 정보 찾기
+        User member = userRepository.findByUser_id(logoutFormDTO.getUser_id());
+
+        if(member == null){
+            return new ResponseEntity<>(new LogoutResponseFormDTO("존재하지 않은 아이디 입니다.") , HttpStatus.NOT_FOUND);
+        }else{
+            LoginInfo loginInfo = loginRepository.findByUser(member);
+            if(passwordEncoder.matches(sessionKey , loginInfo.getSessionKey())){
+                loginRepository.delete(loginInfo);
+                // loginRepository.save(loginInfo);
+                session.removeAttribute(loginInfo.getUser().getUser_id());  // 세션에 저장된 로그인 유저 정보 삭제
+                session.invalidate();   // 세션 무효화
+                return new ResponseEntity<>(new LogoutResponseFormDTO("로그아웃이 완료되었습니다."), HttpStatus.OK);
+            }else{  // 세션 정보가 일치하지 않았을때
+                return new ResponseEntity<>(new LogoutResponseFormDTO("세션 키가 일치하지 않습니다."), HttpStatus.UNAUTHORIZED);
+            }
+        }
 
     }
 }

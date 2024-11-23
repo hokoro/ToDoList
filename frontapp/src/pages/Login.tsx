@@ -43,6 +43,7 @@ const Login: React.FC = () => {
                 alert(data.message);
                 // token 사용 예제 (로컬 스토리지 저장)
                 localStorage.setItem('authToken', data.token);
+                localStorage.setItem("user_id",formData.user_id);
                 //localStorage.setItem('isLogined' , );
                 navigate('/');
             }else{
