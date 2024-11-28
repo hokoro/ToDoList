@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
 @DynamicUpdate
 @Entity
+@EntityListeners(AuditingEntityListener.class)  // Auditing 활성화
 @Table(name = "todolist")
 public class ToDoList {
     @Id
@@ -23,17 +25,17 @@ public class ToDoList {
     private Long id;
 
     // 할일 목록
-    @Column(nullable = false , unique = false , name="todo")
+    @Column(nullable = false , name="todo")
     private String todo;
 
     // 날짜 정보(생성 날짜)
     @CreatedDate
-    @Column(updatable = false , nullable = false)
+    @Column(updatable = false , nullable = false , name="createdAt")
     private LocalDateTime createdAt;
 
     // 날짜 정보(수정 날짜)
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column(name="updateAt")
     private LocalDateTime updateAt;
 
     // 작성자 정보

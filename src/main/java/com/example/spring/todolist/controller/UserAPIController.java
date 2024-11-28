@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserAPIController {
     private final UserService userService;
-    private final UserRepository userRepository;
 
     @PostMapping("/user/create")
     public ResponseEntity<UserResponseFormDTO> Create(@RequestBody UserCreateFormDTO userCreateFormDTO){

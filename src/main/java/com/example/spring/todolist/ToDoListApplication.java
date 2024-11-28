@@ -23,6 +23,6 @@ public class ToDoListApplication {
     @PostConstruct  // spring이  초기화된 후 실행되는 메서드의 한 종류
     public void init(){
         // timezone 설정
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));   // 서버 시간대 설정
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));   // 서버 시간대 설정
     }
 }
