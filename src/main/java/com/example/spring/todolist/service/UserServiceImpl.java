@@ -1,10 +1,8 @@
 package com.example.spring.todolist.service;
 
 
-import com.example.spring.todolist.domain.LoginInfo;
 import com.example.spring.todolist.domain.User;
 import com.example.spring.todolist.dto.*;
-import com.example.spring.todolist.repository.LoginRepository;
 import com.example.spring.todolist.repository.UserRepository;
 import com.example.spring.todolist.service.interfaces.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -24,13 +22,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    private final LoginRepository loginRepository;
-
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();  // 암호 데이터 복호화 , 매칭 관련 여부 확인
 
 
 
-
+    // 아이디 생성
     @Override
     public ResponseEntity<UserResponseFormDTO> create(UserCreateFormDTO userCreateFormDTO){
 
@@ -57,6 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    // 로그인
     @Override
     public ResponseEntity<LoginResponseFormDTO> login(LoginFormDTO loginFormDTO , HttpSession session){
         // blank
@@ -71,18 +68,11 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>(new LoginResponseFormDTO("존재하지 않은 아이디 입니다.","") , HttpStatus.NOT_FOUND);
         }else{  // 아이디 정보가 있을때
             if(passwordEncoder.matches(loginFormDTO.getPassword() , member.getPassword())){ // 패스워드 일치
-                LoginInfo info = loginRepository.findByUser(member);
-                if(info != null){
+                if(session.getAttribute(loginFormDTO.getUser_id()) != null){    // 이미 다른 기기에서 로그인 중일때
                     return new ResponseEntity<>(new LoginResponseFormDTO("이미 다른기기에서 로그인중입니다","") , HttpStatus.FORBIDDEN);
                 }
-
                 String sessionKey = UUID.randomUUID().toString();
-                session.setAttribute(loginFormDTO.getUser_id(), sessionKey);
-                LoginInfo loginInfo = LoginInfo.builder().
-                        sessionKey(passwordEncoder.encode(sessionKey)).
-                        user(member).
-                        build();
-                loginRepository.save(loginInfo);
+                session.setAttribute(loginFormDTO.getUser_id(), passwordEncoder.encode(sessionKey));
                 return new ResponseEntity<>(new LoginResponseFormDTO("로그인에 성공하였습니다.",sessionKey) ,HttpStatus.OK);
             }else{  // 아이디와 비번이 일치하지 않을 때
                 return new ResponseEntity<>(new LoginResponseFormDTO("아이디와 비밀번호를 확인해주세요",""),HttpStatus.UNAUTHORIZED);
@@ -106,11 +96,10 @@ public class UserServiceImpl implements UserService {
         if(member == null){
             return new ResponseEntity<>(new LogoutResponseFormDTO("존재하지 않은 아이디 입니다.") , HttpStatus.NOT_FOUND);
         }else{
-            LoginInfo loginInfo = loginRepository.findByUser(member);
-            if(passwordEncoder.matches(sessionKey , loginInfo.getSessionKey())){
-                loginRepository.delete(loginInfo);
+            String value = (String) session.getAttribute(logoutFormDTO.getUser_id());
+            if(passwordEncoder.matches(sessionKey ,value)){
                 // loginRepository.save(loginInfo);
-                session.removeAttribute(loginInfo.getUser().getUser_id());  // 세션에 저장된 로그인 유저 정보 삭제
+                session.removeAttribute(logoutFormDTO.getUser_id());  // 세션에 저장된 로그인 유저 정보 삭제
                 session.invalidate();   // 세션 무효화
                 return new ResponseEntity<>(new LogoutResponseFormDTO("로그아웃이 완료되었습니다."), HttpStatus.OK);
             }else{  // 세션 정보가 일치하지 않았을때
